@@ -21,6 +21,15 @@ nothing fancy here and I don't expect anyone other than myself to be using this.
 `gfx_demo` is the main interface here:
 
 ```rust
+extern crate gfx_demo;
+
+const WINDOW_TITLE: &'static str = "Fire";
+const WINDOW_WIDTH: u32 = 640;
+const WINDOW_HEIGHT: u32 = 480;
+const CANVAS_WIDTH: u32 = 100;
+const CANVAS_HEIGHT: u32 = 100;
+const TICK_MS: u64 = 10;
+
 fn main() {
     let mut i = 0;
     let mut inc = true;
