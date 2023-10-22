@@ -23,10 +23,10 @@ use sdl2::pixels::PixelFormatEnum;
 ///
 pub fn gfx_demo<F>(
     title: &str,
-    window_width: u32,
-    window_height: u32,
-    canvas_width: u32,
-    canvas_height: u32,
+    window_width: usize,
+    window_height: usize,
+    canvas_width: usize,
+    canvas_height: usize,
     tick_ms: u64,
     mut tick_fn: F,
 ) -> Result<(), String>
@@ -37,7 +37,7 @@ where
     let video_subsystem = sdl_context.video()?;
 
     let window = video_subsystem
-        .window(title, window_width, window_height)
+        .window(title, window_width as u32, window_height as u32)
         .build()
         .map_err(|_| "Failed to create SDL window")?;
 
@@ -48,7 +48,11 @@ where
     let texture_creator = canvas.texture_creator();
 
     let mut texture = texture_creator
-        .create_texture_streaming(PixelFormatEnum::ARGB8888, canvas_width, canvas_height)
+        .create_texture_streaming(
+            PixelFormatEnum::ARGB8888,
+            canvas_width as u32,
+            canvas_height as u32,
+        )
         .map_err(|_| "Failed to create SDL texture")?;
 
     let mut pixels = vec![0xff000000u32; (canvas_width * canvas_height) as usize];
